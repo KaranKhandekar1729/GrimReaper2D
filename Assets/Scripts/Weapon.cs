@@ -7,6 +7,15 @@ public class Weapon : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float fireForce = 20f;
+
+    public float offset;
+
+    private void Update()
+    {
+        Vector3 aimDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, aimAngle + offset);
+    }
     
     public void Fire()
     {
